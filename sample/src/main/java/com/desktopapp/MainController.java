@@ -3,7 +3,6 @@ package com.desktopapp;
 import javafx.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,33 +17,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class MainController {
-    public static Scene CreateScene(Integer id) throws Exception {
-     
-        URL sceneUrl = MainController.class.getResource("login-scene.fxml");
-
-        // if (sceneUrl == null) {
-        //     throw new Exception("Arquivo FXML 'MainScreen.fxml' não foi encontrado!");
-        // }
-
-        FXMLLoader loader = new FXMLLoader(sceneUrl);
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-
-        MainController controller = loader.getController();
-        controller.setId(id);
-        
-        return scene;
-    }
-
     private Integer id;
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
-    @FXML
-    protected void initialize(URL location, ResourceBundle Resources) {
-        this.btLogin.setText(id.toString());
-    }
+    // indica que os campos a seguir então vinculados no fxml. esse @ representa o id refereneciado
     @FXML
     protected Button btLogin;
     @FXML
@@ -54,150 +29,75 @@ public class MainController {
     @FXML
     protected CheckBox cbPass;
 
+    public static Scene CreateScene(Integer id) throws Exception {
+        URL sceneUrl = MainController.class.getResource("login-scene.fxml");
+    
+        // Se id for 2, carrega a cena de cartas
+        if (id == 2) {
+            sceneUrl = MainController.class.getResource("cartaScene.fxml");
+        }
+    
+        FXMLLoader loader = new FXMLLoader(sceneUrl); //isso lê o arquivo fxml
+        Parent root = loader.load(); // lê e traduz o fxml pra java
+        Scene scene = new Scene(root); // dria uma nova cena e mostra oque foi carregado no root
+    
+        MainController controller = loader.getController(); // ele cria um controler método nativo
+        // o contolador responde aos eventos do usuário na cerna
+
+        controller.setId(id);
+        
+        return scene;
+    }
+    
+
+    @FXML // aqui depois da declaração eu gerencio eventos que podem ocorrer com o elemento no fxl
+
+    //  protected diz que só pode ser acessado no mesmo pacote
+    protected void initialize(URL location, ResourceBundle resources) {
+        this.btLogin.setText(id != null ? id.toString() : "Login");
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @FXML
     protected void submit(ActionEvent e) throws Exception {
+        // Validação de login
         if (!tfLogin.getText().equals("Nicolle")) {
-            Alert alert = new Alert(
-                AlertType.ERROR,
-                "Você não é a Nicolle!",
-                ButtonType.OK
-            );
-            alert.showAndWait();
+            showAlert("Você não é a Nicolle!");
             return;
         }
 
         if (!pfPass.getText().equals("senha")) {
-            Alert alert = new Alert(
-                AlertType.ERROR,
-                "Senha errada, você não é a Nicolle!",
-                ButtonType.OK
-            );
-            alert.showAndWait();
+            showAlert("Senha errada, você não é a Nicolle!");
             return;
         }
 
-        Stage crrStage = (Stage)btLogin
-            .getScene().getWindow();
-        crrStage.close();
+        // Se o login for bem-sucedido, abra a nova cena de cartas
+        switchToCartaScene();
+    }
 
+    private void showAlert(String message) {
+        Alert alert = new Alert(AlertType.ERROR, message, ButtonType.OK);
+        alert.showAndWait();
+    }
+
+    private void switchToCartaScene() throws Exception {
+        // Fechar a janela atual
+        Stage currentStage = (Stage) btLogin.getScene().getWindow();
+        currentStage.close();
+
+        // Criar a nova cena de cartas
+        URL sceneUrl = MainController.class.getResource("cartaScene.fxml");
+        FXMLLoader loader = new FXMLLoader(sceneUrl);
+        Parent root = loader.load();
+        Scene newScene = new Scene(root);
+
+        // Exibir a nova cena
         Stage newStage = new Stage();
-        Scene newScene = MainController.CreateScene(this.id + 1);
         newStage.setScene(newScene);
+        newStage.setTitle("Cena de Cartas heheheh");
         newStage.show();
     }
-    
 }
-
-
-// package com.desktopapp;
-
-// import java.net.URL;
-// import javafx.event.ActionEvent;
-// import javafx.fxml.FXML;
-// import javafx.fxml.FXMLLoader;
-// import javafx.scene.Parent;
-// import javafx.scene.Scene;
-// import javafx.scene.control.Alert;
-// import javafx.scene.control.Alert.AlertType;
-// import javafx.scene.input.MouseEvent;
-// import javafx.stage.Stage;
-// import javafx.scene.control.Button;
-// import javafx.scene.control.ButtonType;
-// import javafx.scene.control.CheckBox;
-// import javafx.scene.control.PasswordField;
-// import javafx.scene.control.TextField;
-
-// public class LoginSceneController {
-
-//     public static Scene CreateScene() throws Exception {
-//         // Ajuste o caminho do seu arquivo FXML conforme necessário
-//         URL sceneUrl = LoginSceneController.class.getResource("projetoScene.fxml");
-//         Parent root = FXMLLoader.load(sceneUrl);
-//         return new Scene(root);
-//     }
-//         // Variáveis que representam os componentes
-//         // Note que id/field devem ser iguais ao nome
-//         // que aparece aqui.
-//         @FXML
-//         protected Button btLogin;
-//         @FXML
-//         protected TextField tfLogin;
-//         @FXML
-//         protected PasswordField pfPass;
-//         @FXML
-//         protected CheckBox cbPass;
-//         // Evento submit executado ao rodar a aplicação.
-//         @FXML
-//         protected void onButtonClick(MouseEvent e) throws Exception {
-            
-//         }
-//     }
-
-
-// package com.desktopapp;
-
-// import java.net.URL;
-// import javafx.event.ActionEvent;
-// import javafx.fxml.FXML;
-// import javafx.fxml.FXMLLoader;
-// import javafx.scene.Parent;
-// import javafx.scene.Scene;
-// import javafx.scene.control.Alert;
-// import javafx.scene.control.Alert.AlertType;
-// import javafx.scene.input.MouseEvent;
-// import javafx.stage.Stage;
-// import javafx.scene.control.Button;
-// import javafx.scene.control.ButtonType;
-// import javafx.scene.control.CheckBox;
-// import javafx.scene.control.PasswordField;
-// import javafx.scene.control.TextField;
-
-// public class LoginSceneController {
-
-//     public static Scene CreateScene(Integer id) throws Exception {
-//         // Ajuste o caminho do seu arquivo FXML conforme necessário
-
-//         URL sceneUrl = LoginSceneController.class.getResource("projetoScene.fxml");
-
-//         LoginSceneController controller = new LoginSceneController();
-//         FXMLLoader loader = FXMLLoader.load(sceneUrl)
-//         Parent root = loader.load();
-//         Scene scene = new Scene(root);
-
-
-//         return scene;
-
-        
-//     }
-//         // Variáveis que representam os componentes
-//         // Note que id/field devem ser iguais ao nome
-//         // que aparece aqui.
-//         @FXML
-//         protected Button btLogin;
-//         @FXML
-//         protected TextField tfLogin;
-//         @FXML
-//         protected PasswordField pfPass;
-//         @FXML
-//         protected CheckBox cbPass;
-//         // Evento submit executado ao rodar a aplicação.
-//         @FXML
-
-//         // como mudar der cena
-
-//         protected void onButtonClick(MouseEvent e) throws Exception { 
-//             Stage crrStage = (Stage)btLogin
-//             .getScene().getWindow();
-
-//             crrStage.close();
-
-//             Stage newStage = new Stage();
-//             Scene newScene = LoginSceneController.CreateScene(null);
-//             newStage.setScene(newScene);
-//             newStage.show();
-//         }
-//     }
-
-
-
-
