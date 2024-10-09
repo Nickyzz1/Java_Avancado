@@ -100,4 +100,6 @@ public class MainController {
         newStage.setTitle("Cena de Cartas heheheh");
         newStage.show();
     }
+
+    
 }

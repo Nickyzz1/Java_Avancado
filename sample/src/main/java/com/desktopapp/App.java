@@ -18,7 +18,7 @@ public class App extends Application {
         Scene scene = MainController.CreateScene(1);
         
         // Define o título da janela
-        primaryStage.setTitle("Aplicação de Login");
+        primaryStage.setTitle("Login cartas");
         
         // Define a cena no estágio primário
         primaryStage.setScene(scene);
