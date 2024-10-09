@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane id="container" fx:id="btn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="213.0" prefWidth="534.0" style="-fx-background-radius: 10; -fx-background-color: #390a37;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.desktopapp.LoginSceneController">
+<Pane id="container" fx:id="btn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="213.0" prefWidth="534.0" style="-fx-background-radius: 10; -fx-background-color: #390a37;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.desktopapp.MainController">
    <children>
       <Button id="btn" fx:id="btn" layoutX="400.0" layoutY="130.0" mnemonicParsing="false" onMouseClicked="#onButtonClick" prefHeight="25.0" prefWidth="69.0" style="-fx-background-color: #71286f;" text="Logar" textFill="WHITE" />
       <CheckBox id="cb" layoutX="45.0" layoutY="142.0" mnemonicParsing="false" text="Ver senha" textFill="WHITE">
