@@ -1,0 +1,4 @@
+ORM é como o sequelize
+vc pode mudar a estrutura de banco de dados e nn perder os dados
+spring hiberNation
+vincular classe, vinular eventos com id
