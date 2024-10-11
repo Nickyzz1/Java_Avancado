@@ -33,7 +33,7 @@ public class DrawController implements Initializable {
         Parent root = loader.load();
         Scene scene = new Scene(root);
         DrawController controller = loader.getController();
-        controller.setId(id);
+        // controller.setId(id);
         return scene;
     }
 
@@ -50,6 +50,9 @@ public class DrawController implements Initializable {
 
         double cx = w/2;
         double cy = h/2;
+        double dx = e.getX() - cx;
+        double dy = e.getY() - cy;
+        double angle = Math.atan2(dy, -dx) / Math.PI + 180;
 
         double currentArc = 0;
     }
@@ -94,9 +97,9 @@ public class DrawController implements Initializable {
         }
     }
 
-    private void setId(Integer id) {
+    // private void setId(Integer id) {
        
-    }
+    // }
 }
 
 
