@@ -1,6 +1,7 @@
 public class Sets {
 
-    public static Set New(Object... values) {
+    public static Set New(Object... values) { // vc pode passar quantos parâmetros quiser, incluindo nenhum
+        //o objext permite qualquwer tipo de parâmtro, desde arrays a doubles
         Set[] sets = new Set[values.length];
         for (int i = 0; i < values.length; i++)
         {
@@ -12,3 +13,17 @@ public class Sets {
         return new ValuesSet(sets);
     }
 }
+
+// exemplo de como usar o override
+// class Animal {
+//     public void fazerSom() {
+//         System.out.println("Som do animal");
+//     }
+// }
+
+// class Cachorro extends Animal {
+//     @Override
+//     public void fazerSom() {
+//         System.out.println("Latido");
+//     }
+// }

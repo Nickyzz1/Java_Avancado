@@ -7,7 +7,7 @@ public class ValuesSet implements Set {
     {
         // Coloca no HashSet
     }
-
+    // indica que os métodos estão sendo implementados segundo a interface
     @Override
     public boolean contains(Set element) {
         // TODO Auto-generated method stub
