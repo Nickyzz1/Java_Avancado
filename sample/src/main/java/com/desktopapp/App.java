@@ -17,13 +17,12 @@ public class App extends Application {
         // Cria a cena inicial com id 1
         Scene scene = MainController.CreateScene(1);
         
-        // Define o título da janela
         primaryStage.setTitle("Login cartas");
         
-        // Define a cena no estágio primário
-        primaryStage.setScene(scene);
+        // fefine a cena no estágio primário
+        primaryStage.setScene(scene); 
         
-        // Exibe a janela
+        // exibe a janela
         primaryStage.show();
     }
 }
